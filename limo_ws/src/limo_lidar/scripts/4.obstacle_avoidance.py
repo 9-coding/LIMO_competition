@@ -41,16 +41,16 @@ class Limo_obstacle_avoidence:
             []
         )  # Initializing center_list_right list with empty value
 
-        self.scan_dgree = 60  # Initializing scan_dgree variable with 60 value
+        self.scan_dgree = 40  # Initializing scan_dgree variable with 60 value
         self.min_dist = 0.2  # Initializing min_dist variable with 0.2 value
 
         self.speed = 0  # Initializing speed variable with 0 value
         self.angle = 0  # Initializing angle variable with 0 value
-        self.default_speed = 0.15  # Initializing default_speed variable with 0.15 value
+        self.default_speed = 0.2  # Initializing default_speed variable with 0.15 value
         self.default_angle = 0.0  # Initializing default_angle variable with 0.0 value
         self.turning_speed = 0.08  # Initializing turning_speed variable with 0.08 value
         self.backward_speed = (
-            -0.08
+            -0.15
         )  # Initializing backward_speed variable with -0.08 value
 
         self.OBSTACLE_PERCEPTION_BOUNDARY = (
