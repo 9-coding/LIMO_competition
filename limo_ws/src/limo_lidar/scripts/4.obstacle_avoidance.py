@@ -20,7 +20,11 @@ class Limo_obstacle_avoidence:
         )  # Subscribing to "/scan" topic with LaserScan message type and calling laser_callback function
         self.pub = rospy.Publisher(
             "/cmd_vel", Twist, queue_size=3
-        )  # Creating a Publisher object to publish Twist message on "/cmd_vel" topic with queue_size of 3
+        )  # Creating a Publisher object to publish Twist message on "/cmd_vel" topic with queue_size of 3	
+	self.mode_pub = rospy.Publisher(
+	    '/mode', String, queue_size=10
+	) 
+        
         self.rate = rospy.Rate(
             30
         )  # Creating a Rate object with 30 Hz frequency to control the publishing rate
@@ -178,9 +182,13 @@ class Limo_obstacle_avoidence:
             # Publish the velocity command to move the robot
             self.pub.publish(self.cmd_vel_msg)
 
-            # Wait for a short period of time to achieve the desired rate
-            self.rate.sleep()
+	    self.mode_pub.publish("obstacle")
 
+	else:
+	    self.mode_pub.publish("lane")
+
+	# Wait for a short period of time to achieve the desired rate
+        self.rate.sleep()
 
 # Check if this is the main module that is being run
 if __name__ == "__main__":
