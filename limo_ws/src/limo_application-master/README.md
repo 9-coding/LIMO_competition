@@ -1,13 +1,6 @@
 # limo_application
 LIMO Application by WeGo-Robotics
 
-## Run
-```
-roslaunch limo_bringup limo_start.launch
-roslaunch astra_camera dabai_u3.launch
-roslaunch limo_application lane_detection.launch
-```
-
 ### Outline
 * LIMO에 사용 가능한 Application
 * Ubuntu 18.04, Python 2.7, OpenCV 4.1.1 사용

@@ -28,7 +28,7 @@ class CrossWalkDetector:
         self.cvbridge = CvBridge()
         rospy.Subscriber(rospy.get_param("~image_topic_name", "/camera/rgb/image_raw/compressed"), CompressedImage, self.Image_CB)
         self.distance_pub = rospy.Publisher("/limo/crosswalk_y", Int32, queue_size=5)
-        self.viz = rospy.get_param("~visualization", False)
+        self.viz = rospy.get_param("visualization", True)
 
     # return Int32
     def calcCrossWalkDistance(self, _img):
@@ -89,7 +89,10 @@ class CrossWalkDetector:
             이미지의 직선 검출
         '''
         new_img = _img.copy()
-        self.lines = cv2.HoughLinesP(new_img, self.RHO, self.THETA * np.pi / 180, self.THRESHOLD, minLineLength=10, maxLineGap=5)
+	try: 
+           self.lines = cv2.HoughLinesP(new_img, self.RHO, self.THETA * np.pi / 180, self.THRESHOLD, minLineLength=10, maxLineGap=5)
+	except:
+	   self.lines = None
 
         if self.lines is None:
             # print("length is 0")
@@ -151,6 +154,7 @@ class CrossWalkDetector:
         self.crosswalk_distance = self.calcCrossWalkDistance(self.thresholded_image)
         self.distance_pub.publish(self.crosswalk_distance)
 
+        print(self.viz)
         # visualization
         if self.viz:
             self.visResult()

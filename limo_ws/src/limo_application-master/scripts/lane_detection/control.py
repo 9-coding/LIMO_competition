@@ -104,7 +104,7 @@ class LimoController:
         if _data.data == -1:
             self.distance_to_ref = 0
         else:
-            self.distance_to_ref = self.REF_X - _data.data
+            self.distance_to_ref = abs(self.REF_X - _data.data)
 
     def crosswalk_y_callback(self, _data):
         '''
